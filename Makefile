@@ -65,7 +65,6 @@ _build: all
 	-rm -fR ./_build
 	mkdir -p _build
 	cp $(BASE_MODULES) _build
-	cp $(SCRIPT_MODULES) _build
 	mkdir -p _build/icons
 	cp icons/*.svg _build/icons/
 	mkdir -p _build/schemas
