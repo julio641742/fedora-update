@@ -351,7 +351,7 @@
 				            <property name="receives_default">True</property>
 				            <property name="events"/>
 				            <property name="relief">none</property>
-				            <property name="uri">https://github.com/julio641742/fedora-update</property></property>
+				            <property name="uri">https://github.com/julio641742/fedora-update</property>
 				        </object>
 				        <packing>
 				            <property name="top_attach">1</property>

@@ -148,7 +148,7 @@ const FedoraUpdateIndicator = new Lang.Class({
 		// Restore previous state
 		this._updateList = UPDATES_LIST;
 		this._updateStatus(UPDATES_PENDING);
-		this._startFolderMonitor();
+		this._readUpdates();
 
 	},
 
