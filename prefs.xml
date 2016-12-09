@@ -1,35 +1,31 @@
 <?xml version="1.0"?>
 <!--
-    This file is part of Arch Linux Updates Indicator
+    This file is part of Fedora Linux Updates Indicator
 
-    Arch Linux Updates Indicator is free software: you can redistribute it and/or modify
+    Fedora Linux Updates Indicator is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Arch Linux Updates Indicator is distributed in the hope that it will be useful,
+    Fedora Linux Updates Indicator is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Arch Linux Updates Indicator.  If not, see <http://www.gnu.org/licenses/>.
+    along with Fedora Linux Updates Indicator.  If not, see <http://www.gnu.org/licenses/>.
 
     Copyright 2016 Raphaël Rochet
+    Copyright 2016 Julio Galvan
 -->
-<interface domain="arch-update">
+<interface domain="fedora-update">
 
 <object class="GtkAdjustment" id="Adjust_1">
-	<property name="lower">5</property>
-	<property name="upper">5000</property>
-	<property name="step_increment">1</property>
-</object>
-<object class="GtkAdjustment" id="Adjust_2">
 	<property name="lower">30</property>
 	<property name="upper">2000</property>
 	<property name="step_increment">30</property>
 </object>
-<object class="GtkAdjustment" id="Adjust_3">
+<object class="GtkAdjustment" id="Adjust_2">
 	<property name="lower">0</property>
 	<property name="upper">99</property>
 	<property name="step_increment">1</property>
@@ -72,24 +68,7 @@
 						</object>
 					</child>
 
-					<child>
-						<object class="GtkBox">
-							<property name="margin-left">12</property>
-							<property name="spacing">12</property>
-							<child>
-								<object class="GtkLabel">
-									<property name="label" translatable="yes">Time to wait before first check (seconds)</property>
-									<property name="hexpand">true</property>
-									<property name="halign">1</property>
-								</object>
-							</child>
-							<child>
-								<object class="GtkSpinButton" id="field_wait">
-									<property name="adjustment">Adjust_1</property>
-								</object>
-							</child>
-						</object>
-					</child>
+
 
 					<child>
 						<object class="GtkBox">
@@ -104,7 +83,7 @@
 							</child>
 							<child>
 								<object class="GtkSpinButton" id="field_interval">
-									<property name="adjustment">Adjust_2</property>
+									<property name="adjustment">Adjust_1</property>
 								</object>
 							</child>
 						</object>
@@ -200,7 +179,7 @@
 							</child>
 							<child>
 								<object class="GtkSpinButton" id="field_autoexpandlist">
-									<property name="adjustment">Adjust_3</property>
+									<property name="adjustment">Adjust_2</property>
 								</object>
 							</child>
 						</object>
@@ -277,8 +256,7 @@
 								<object class="GtkComboBoxText" id="field_howmuch">
 									<items>
 										<item translatable="yes" id="0">Count only</item>
-										<item translatable="yes" id="1">New updates names</item>
-										<item translatable="yes" id="2">All updates names</item>
+										<item translatable="yes" id="1">All updates names</item>
 									</items>
 								</object>
 							</child>
@@ -304,22 +282,31 @@
 			<property name="row-homogeneous">false</property>
 			<property name="orientation">vertical</property>
 
-			<child>
-				<object class="GtkVBox">
-					<property name="spacing">6</property>
-					<child>
-						<object class="GtkLabel">
-							<property name="label" translatable="yes">Command to check for package updates</property>
-							<property name="hexpand">true</property>
-							<property name="halign">1</property>
-						</object>
-					</child>
-					<child>
-						<object class="GtkEntry" id="field_checkcmd">
-						</object>
-					</child>
-				</object>
-			</child>
+
+		    <child>
+		        <object class="GtkBox">
+		            <property name="spacing">12</property>
+		            <child>
+		                <object class="GtkLabel">
+		                    <property translatable="yes" name="label">Reset to default values</property>
+		                    <property name="hexpand">true</property>
+		                    <property name="halign">1</property>
+		                    <attributes>
+		                        <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
+		                    </attributes>
+		                </object>
+		            </child>
+		            <child>
+		                <object class="GtkButton" id="reset_button">
+		                    <property name="visible">True</property>
+		                    <property name="label">Reset</property>
+		                    <property name="can_focus">True</property>
+		                    <property name="receives_default">True</property>
+		                </object>
+		            </child>
+		        </object>
+		    </child>
+
 
 			<child>
 				<object class="GtkVBox">
@@ -338,22 +325,49 @@
 				</object>
 			</child>
 
-			<child>
-				<object class="GtkVBox">
-					<property name="spacing">6</property>
-					<child>
-						<object class="GtkLabel">
-							<property name="label" translatable="yes">Pacman local directory path - To detect when new packages are installed</property>
-							<property name="hexpand">true</property>
-							<property name="halign">1</property>
+
+			    <child>
+				<object class="GtkGrid">
+				    <child>
+				        <object class="GtkLabel">
+				            <property name="label" translatable="yes">Check for updates without a password.</property>
+				            <property name="hexpand">true</property>
+				            <property name="wrap">True</property>
+				            <property name="halign">1</property>
+				        </object>
+				        <packing>
+				            <property name="top_attach">0</property>
+				            <property name="left_attach">0</property>
+				        </packing>
+				    </child>
+
+				<child>
+				        <object class="GtkLinkButton" id="homepage_link">
+				            <property name="label" translatable="yes">Wiki</property>
+				            <property name="hexpand">true</property>
+				            <property name="halign">1</property>
+				            <property name="visible">True</property>
+				            <property name="can_focus">True</property>
+				            <property name="receives_default">True</property>
+				            <property name="events"/>
+				            <property name="relief">none</property>
+				            <property name="uri">https://github.com/julio641742/fedora-update</property></property>
+				        </object>
+				        <packing>
+				            <property name="top_attach">1</property>
+				            <property name="left_attach">0</property>
+				        </packing>
+				    </child>
+
+				    	<child>
+						<object class="GtkSwitch" id="field_no_password">
+							<property name="active">false</property>
 						</object>
 					</child>
-					<child>
-						<object class="GtkEntry" id="field_pacmandir">
-						</object>
-					</child>
+
+
 				</object>
-			</child>
+			    </child>
 
 		</object>
 	</child>

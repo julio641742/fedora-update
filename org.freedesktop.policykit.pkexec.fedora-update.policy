@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD polkit Policy Configuration 1.0//EN"
+"http://www.freedesktop.org/software/polkit/policyconfig-1.dtd">
+<policyconfig>
+  <vendor>DNF Update Indicator</vendor>
+  <vendor_url>http://www.freedesktop.org/wiki/Software/polkit/</vendor_url>
+  <action id="org.freedesktop.policykit.pkexec.dnf-update-indicator.list">
+    <description>DNF List Updates</description>
+    <message>Authentication is required to start dnf list updates</message>
+    <icon_name>system-run-symbolic</icon_name>
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>yes</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/dnf</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">list</annotate>
+ 	<annotate key="org.freedesktop.policykit.exec.argv2">updates</annotate>
+  </action>
+  <action id="org.freedesktop.policykit.pkexec.dnf-update-indicator.check-update">
+    <description>DNF Check-Update</description>
+    <message>Authentication is required to start dnf check-update</message>
+    <icon_name>system-run-symbolic</icon_name>
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>yes</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/dnf</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">check-update</annotate>
+  </action>
+  
+</policyconfig>

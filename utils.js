@@ -8,7 +8,7 @@ const ExtensionUtils = imports.misc.extensionUtils;
 
 function getSettings() {
 	let extension = ExtensionUtils.getCurrentExtension();
-	let schema = 'org.gnome.shell.extensions.arch-update';
+	let schema = 'org.gnome.shell.extensions.fedora-update';
 
 	const GioSSS = Gio.SettingsSchemaSource;
 

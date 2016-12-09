@@ -1,12 +1,12 @@
 {
-  "description": "Update indicator for Arch Linux and GNOME Shell.\nCan support AUR or other distros by changing command used to check for and apply updates.", 
-  "name": "Arch Linux Updates Indicator",
+  "description": "Update indicator for Fedora Linux and GNOME Shell.", 
+  "name": "Fedora Linux Updates Indicator",
   "shell-version": [
     "3.18",
     "3.20",
     "3.22"
   ], 
-  "url": "https://github.com/RaphaelRochet/arch-update", 
-  "uuid": "arch-update@RaphaelRochet", 
-  "version": 18
+  "url": "https://github.com/julio641742/fedora-update", 
+  "uuid": "fedora-update@julio641742", 
+  "version": 1
 }
