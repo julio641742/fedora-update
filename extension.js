@@ -497,5 +497,5 @@ function enable() {
 }
 
 function disable() {
-	fedoraUpdateindicator.destroy();
+	fedoraupdateindicator.destroy();
 }
