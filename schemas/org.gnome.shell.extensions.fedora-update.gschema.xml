@@ -1,6 +1,5 @@
 <schemalist gettext-domain="gnome-shell-extensions">
-  <schema id="org.gnome.shell.extensions.fedora-update"
-      path="/org/gnome/shell/extensions/fedora-update/">
+  <schema id="org.gnome.shell.extensions.fedora-update" path="/org/gnome/shell/extensions/fedora-update/">
 
     <key type="i" name="check-interval">
         <default>60</default>

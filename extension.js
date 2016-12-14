@@ -51,9 +51,10 @@ let HOWMUCH            = 0;
 let TRANSIENT          = true;
 let AUTO_EXPAND_LIST   = 0;
 let ALLOW_NO_PASS	   = false;
+let LIST_UPDATES_MAX   = 30;
 let PREPEND_CMD        = "/usr/bin/pkexec --user root ";
-let STOCK_CHECK_CMD    = "dnf check-update";
-let STOCK_UPDATE_CMD   = "dnf update -y";
+let STOCK_CHECK_CMD    = "/usr/bin/dnf check-update";
+let STOCK_UPDATE_CMD   = "/usr/bin/dnf update -y";
 let STOCK_LIST_CMD	   = "/usr/bin/dnf list updates";
 let CHECK_CMD          = PREPEND_CMD + STOCK_CHECK_CMD;
 let UPDATE_CMD         = PREPEND_CMD + STOCK_UPDATE_CMD;
@@ -62,7 +63,6 @@ let LIST_CMD		   = STOCK_LIST_CMD;
 /* Variables we want to keep when extension is disabled (eg during screen lock) */
 let UPDATES_PENDING    = -1;
 let UPDATES_LIST       = [];
-
 
 function init() {
 	String.prototype.format = Format.format;
@@ -74,7 +74,6 @@ const FedoraUpdateIndicator = new Lang.Class({
 	Extends: PanelMenu.Button,
 
 	_TimeoutId: null,
-	_FirstTimeoutId: null,
 	_updateProcess_sourceId: null,
 	_updateProcess_stream: null,
 	_updateProcess_pid: null,
@@ -84,7 +83,7 @@ const FedoraUpdateIndicator = new Lang.Class({
 		this.parent(0.0, "FedoraUpdateIndicator");
 		Gtk.IconTheme.get_default().append_search_path(Me.dir.get_child('icons').get_path());
 
-		this.updateIcon = new St.Icon({icon_name: "arch-unknown-symbolic", style_class: 'system-status-icon'});
+		this.updateIcon = new St.Icon({icon_name: "fedora-unknown-symbolic", style_class: 'system-status-icon'});
 
 		let box = new St.BoxLayout({ vertical: false, style_class: 'panel-status-menu-box' });
 		this.label = new St.Label({ text: '',
@@ -144,19 +143,15 @@ const FedoraUpdateIndicator = new Lang.Class({
 		this._applySettings();
 		this._showChecking(false);
 
-
 		// Restore previous state
 		this._updateList = UPDATES_LIST;
 		this._updateStatus(UPDATES_PENDING);
 		this._readUpdates();
-
 	},
 
 	_openSettings: function () {
 		Util.spawn([ "gnome-shell-extension-prefs", Me.uuid ]);
 	},
-
-
 
 	_applySettings: function() {
 		ALWAYS_VISIBLE = this._settings.get_boolean('always-visible');
@@ -195,17 +190,12 @@ const FedoraUpdateIndicator = new Lang.Class({
 			this._updateProcess_sourceId = null;
 			this._updateProcess_stream = null;
 		}
-		if (this._FirstTimeoutId) {
-			GLib.source_remove(this._FirstTimeoutId);
-			this._FirstTimeoutId = null;
-		}
 		if (this._TimeoutId) {
 			GLib.source_remove(this._TimeoutId);
 			this._TimeoutId = null;
 		}
 		this.parent();
 	},
-
 
 	_checkShowHide: function() {
 		if ( UPDATES_PENDING == -3 ) {
@@ -236,7 +226,7 @@ const FedoraUpdateIndicator = new Lang.Class({
 
 	_showChecking: function(isChecking) {
 		if (isChecking == true) {
-			this.updateIcon.set_icon_name('arch-unknown-symbolic');
+			this.updateIcon.set_icon_name('fedora-unknown-symbolic');
 			this.checkNowMenuContainer.actor.visible = false;
 			this.checkingMenuItem.actor.visible = true;;
 		} else {
@@ -249,9 +239,9 @@ const FedoraUpdateIndicator = new Lang.Class({
 		updatesCount = typeof updatesCount === 'number' ? updatesCount : UPDATES_PENDING;
 		if (updatesCount > 0) {
 			// Updates pending
-			this.updateIcon.set_icon_name('arch-updates-symbolic');
+			this.updateIcon.set_icon_name('fedora-updates-symbolic');
 			this._updateMenuExpander( true, Gettext.ngettext( "%d update pending", "%d updates pending", updatesCount ).format(updatesCount) );
-			this.updatesListMenuLabel.set_text( this._updateList.join("\n") );
+			this.updatesListMenuLabel.set_text( this._updateList.slice(0, LIST_UPDATES_MAX).join("\n") );
 			this.label.set_text(updatesCount.toString());
 			if (NOTIFY && UPDATES_PENDING < updatesCount) {
 				if (HOWMUCH > 0) {
@@ -266,7 +256,7 @@ const FedoraUpdateIndicator = new Lang.Class({
 						// Show notification only if there's new updates
 						this._showNotification(
 							Gettext.ngettext( "New Update", "New Updates", updateList.length ),
-							updateList.join(', '),
+							updateList.slice(0, LIST_UPDATES_MAX).join(', '),
 							false
 						);
 					}
@@ -285,15 +275,15 @@ const FedoraUpdateIndicator = new Lang.Class({
 			this.label.set_text('');
 			if (updatesCount == -1) {
 				// Unknown
-				this.updateIcon.set_icon_name('arch-unknown-symbolic');
+				this.updateIcon.set_icon_name('fedora-unknown-symbolic');
 				this._updateMenuExpander( false, '' );
 			} else if (updatesCount == -2) {
 				// Error
-				this.updateIcon.set_icon_name('arch-error-symbolic');
+				this.updateIcon.set_icon_name('fedora-error-symbolic');
 				this._updateMenuExpander( false, _('Error') );
 			} else {
 				// Up to date
-				this.updateIcon.set_icon_name('arch-uptodate-symbolic');
+				this.updateIcon.set_icon_name('fedora-uptodate-symbolic');
 				this._updateMenuExpander( false, _('Up to date :)') );
 				UPDATES_LIST = []; // Reset stored list
 			}
@@ -396,8 +386,8 @@ const FedoraUpdateIndicator = new Lang.Class({
             if (out) updateList.push(out);
         } while (out);
         updateList = updateList.map(function(p) {
-            // Try to keep only what's before the first space
-            var chunks = p.split(" ", 1);
+            // Try to keep only what's before the first dot
+            var chunks = p.split(".", 1);
             return chunks[0];
         });
         this._updateList = updateList;
@@ -458,13 +448,12 @@ const FedoraUpdateIndicator = new Lang.Class({
         this._readUpdates()
     },
 
-
 	_showNotification: function(title, message, removeAction) {
 		if (this._notifSource == null) {
 			// We have to prepare this only once
 			this._notifSource = new MessageTray.SystemNotificationSource();
 			this._notifSource.createIcon = function() {
-				return new St.Icon({ icon_name: 'arch-lit-symbolic' });
+				return new St.Icon({ icon_name: 'fedora-lit-symbolic' });
 			};
 			// Take care of note leaving unneeded sources
 			this._notifSource.connect('destroy', Lang.bind(this, function() {this._notifSource = null;}));

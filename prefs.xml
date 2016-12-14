@@ -19,7 +19,6 @@
     Copyright 2016 Julio Galvan
 -->
 <interface domain="fedora-update">
-
 <object class="GtkAdjustment" id="Adjust_1">
 	<property name="lower">30</property>
 	<property name="upper">2000</property>
@@ -30,21 +29,17 @@
 	<property name="upper">99</property>
 	<property name="step_increment">1</property>
 </object>
-
 <object class="GtkNotebook" id="prefs_widget">
 	<property name="expand">true</property>
-
 	<child>
 		<object class="GtkGrid">
 			<property name="margin">18</property>
 			<property name="row-spacing">18</property>
 			<property name="row-homogeneous">false</property>
 			<property name="orientation">vertical</property>
-
 			<child>
 				<object class="GtkVBox">
 				<property name="spacing">6</property>
-
 					<child>
 						<object class="GtkBox">
 							<property name="spacing">12</property>
@@ -67,9 +62,6 @@
 							</child>
 						</object>
 					</child>
-
-
-
 					<child>
 						<object class="GtkBox">
 							<property name="margin-left">12</property>
@@ -88,33 +80,11 @@
 							</child>
 						</object>
 					</child>
-
-					<child>
-						<object class="GtkBox">
-							<property name="margin-left">12</property>
-							<property name="spacing">12</property>
-							<child>
-								<object class="GtkLabel">
-									<property translatable="yes" name="label">Strip out versions numbers</property>
-									<property name="hexpand">true</property>
-									<property name="halign">1</property>
-								</object>
-							</child>
-							<child>
-								<object class="GtkSwitch" id="field_stripversions">
-									<property name="active">true</property>
-								</object>
-							</child>
-						</object>
-					</child>
-
 				</object>
 			</child>
-
 			<child>
 				<object class="GtkVBox">
 				<property name="spacing">6</property>
-
 					<child>
 						<object class="GtkLabel">
 							<property name="label" translatable="yes">Indicator</property>
@@ -125,7 +95,6 @@
 							</attributes>
 						</object>
 					</child>
-
 					<child>
 						<object class="GtkBox">
 							<property name="spacing">12</property>
@@ -144,7 +113,6 @@
 							</child>
 						</object>
 					</child>
-
 					<child>
 						<object class="GtkBox">
 							<property name="spacing">12</property>
@@ -163,7 +131,6 @@
 							</child>
 						</object>
 					</child>
-
 					<child>
 						<object class="GtkBox">
 							<property name="spacing">12</property>
@@ -184,14 +151,11 @@
 							</child>
 						</object>
 					</child>
-
 				</object>
 			</child>
-
 			<child>
 				<object class="GtkVBox">
 					<property name="spacing">6</property>
-
 					<child>
 						<object class="GtkLabel">
 							<property name="label" translatable="yes">Notification</property>
@@ -202,7 +166,6 @@
 							</attributes>
 						</object>
 					</child>
-
 					<child>
 						<object class="GtkBox">
 							<property name="spacing">12</property>
@@ -221,7 +184,6 @@
 							</child>
 						</object>
 					</child>
-
 					<child>
 						<object class="GtkBox">
 							<property name="spacing">12</property>
@@ -240,7 +202,6 @@
 							</child>
 						</object>
 					</child>
-
 					<child>
 						<object class="GtkBox">
 							<property name="spacing">12</property>
@@ -262,52 +223,44 @@
 							</child>
 						</object>
 					</child>
-
 				</object>
 			</child>
-
 		</object>
 	</child>
-
 	<child type="tab">
 		<object class="GtkLabel">
 			<property name="label" translatable="yes">Basic settings</property>
 		</object>
 	</child>
-
 	<child>
 		<object class="GtkGrid">
 			<property name="margin">18</property>
 			<property name="row-spacing">18</property>
 			<property name="row-homogeneous">false</property>
 			<property name="orientation">vertical</property>
-
-
-		    <child>
-		        <object class="GtkBox">
-		            <property name="spacing">12</property>
-		            <child>
-		                <object class="GtkLabel">
-		                    <property translatable="yes" name="label">Reset to default values</property>
-		                    <property name="hexpand">true</property>
-		                    <property name="halign">1</property>
-		                    <attributes>
-		                        <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
-		                    </attributes>
-		                </object>
-		            </child>
-		            <child>
-		                <object class="GtkButton" id="reset_button">
-		                    <property name="visible">True</property>
-		                    <property name="label">Reset</property>
-		                    <property name="can_focus">True</property>
-		                    <property name="receives_default">True</property>
-		                </object>
-		            </child>
-		        </object>
-		    </child>
-
-
+			<child>
+				<object class="GtkBox">
+				    	<property name="spacing">12</property>
+				    	<child>
+						<object class="GtkLabel">
+						    <property translatable="yes" name="label">Reset to default values</property>
+						    <property name="hexpand">true</property>
+						    <property name="halign">1</property>
+						    <attributes>
+						        <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
+						    </attributes>
+						</object>
+					</child>
+					<child>
+						<object class="GtkButton" id="reset_button">
+							<property name="visible">True</property>
+							<property name="label">Reset</property>
+							<property name="can_focus">True</property>
+							<property name="receives_default">True</property>
+						</object>
+					</child>
+		       		</object>
+		    	</child>
 			<child>
 				<object class="GtkVBox">
 					<property name="spacing">6</property>
@@ -324,60 +277,50 @@
 					</child>
 				</object>
 			</child>
-
-
-			    <child>
+			<child>
 				<object class="GtkGrid">
-				    <child>
-				        <object class="GtkLabel">
-				            <property name="label" translatable="yes">Check for updates without a password.</property>
-				            <property name="hexpand">true</property>
-				            <property name="wrap">True</property>
-				            <property name="halign">1</property>
-				        </object>
-				        <packing>
-				            <property name="top_attach">0</property>
-				            <property name="left_attach">0</property>
-				        </packing>
-				    </child>
-
-				<child>
-				        <object class="GtkLinkButton" id="homepage_link">
-				            <property name="label" translatable="yes">Wiki</property>
-				            <property name="hexpand">true</property>
-				            <property name="halign">1</property>
-				            <property name="visible">True</property>
-				            <property name="can_focus">True</property>
-				            <property name="receives_default">True</property>
-				            <property name="events"/>
-				            <property name="relief">none</property>
-				            <property name="uri">https://github.com/julio641742/fedora-update</property>
-				        </object>
-				        <packing>
-				            <property name="top_attach">1</property>
-				            <property name="left_attach">0</property>
-				        </packing>
-				    </child>
-
-				    	<child>
+					<child>
+						<object class="GtkLabel">
+						    <property name="label" translatable="yes">Check for updates without a password.</property>
+						    <property name="hexpand">true</property>
+						    <property name="wrap">True</property>
+						    <property name="halign">1</property>
+						</object>
+						<packing>
+						    <property name="top_attach">0</property>
+						    <property name="left_attach">0</property>
+						</packing>
+					</child>
+					<child>
+						<object class="GtkLinkButton" id="homepage_link">
+						    <property name="label" translatable="yes">Wiki</property>
+						    <property name="hexpand">true</property>
+						    <property name="halign">1</property>
+						    <property name="visible">True</property>
+						    <property name="can_focus">True</property>
+						    <property name="receives_default">True</property>
+						    <property name="events"/>
+						    <property name="relief">none</property>
+						    <property name="uri">https://github.com/julio641742/fedora-update</property>
+						</object>
+						<packing>
+						    <property name="top_attach">1</property>
+						    <property name="left_attach">0</property>
+						</packing>
+					</child>
+			    		<child>
 						<object class="GtkSwitch" id="field_no_password">
 							<property name="active">false</property>
 						</object>
 					</child>
-
-
 				</object>
-			    </child>
-
+			</child>
 		</object>
 	</child>
-
 	<child type="tab">
 		<object class="GtkLabel">
 			<property name="label" translatable="yes">Advanced settings</property>
 		</object>
 	</child>
-
 </object>
-
 </interface>
