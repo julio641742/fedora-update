@@ -56,7 +56,7 @@ let PREPEND_CMD        = "/usr/bin/pkexec --user root ";
 let STOCK_CHECK_CMD    = "/usr/bin/dnf check-update";
 let STOCK_UPDATE_CMD   = "/usr/bin/dnf update -y";
 let STOCK_LIST_CMD	   = "/usr/bin/dnf list updates";
-let CHECK_CMD          = PREPEND_CMD + STOCK_CHECK_CMD;
+let CHECK_CMD          = STOCK_CHECK_CMD;
 let UPDATE_CMD         = PREPEND_CMD + STOCK_UPDATE_CMD;
 let LIST_CMD		   = STOCK_LIST_CMD;
 
