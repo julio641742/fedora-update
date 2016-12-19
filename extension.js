@@ -49,16 +49,15 @@ let CHECK_INTERVAL     = 60*60;   // 1h
 let NOTIFY             = false;
 let HOWMUCH            = 0;
 let TRANSIENT          = true;
-let AUTO_EXPAND_LIST   = 0;
-let ALLOW_NO_PASS	   = false;
+let ALLOW_NO_PASS      = false;
 let LIST_UPDATES_MAX   = 30;
 let PREPEND_CMD        = "/usr/bin/pkexec --user root ";
 let STOCK_CHECK_CMD    = "/usr/bin/dnf check-update --refresh";
 let STOCK_UPDATE_CMD   = "/usr/bin/dnf update -y --refresh";
-let STOCK_LIST_CMD	   = "/usr/bin/dnf list updates";
+let STOCK_LIST_CMD     = "/usr/bin/dnf list updates";
 let CHECK_CMD          = STOCK_CHECK_CMD;
 let UPDATE_CMD         = PREPEND_CMD + STOCK_UPDATE_CMD;
-let LIST_CMD		   = STOCK_LIST_CMD;
+let LIST_CMD	       = STOCK_LIST_CMD;
 
 /* Variables we want to keep when extension is disabled (eg during screen lock) */
 let UPDATES_PENDING    = -1;
@@ -131,7 +130,6 @@ const FedoraUpdateIndicator = new Lang.Class({
 		this.menu.addMenuItem(settingsMenuItem);
 
 		// Bind some events
-		this.menu.connect('open-state-changed', Lang.bind(this, this._onMenuOpened));
 		this.checkNowMenuItem.connect('activate', Lang.bind(this, this._checkUpdates));
 		cancelButton.connect('clicked', Lang.bind(this, this._cancelCheck));
 		settingsMenuItem.connect('activate', Lang.bind(this, this._openSettings));
@@ -209,21 +207,7 @@ const FedoraUpdateIndicator = new Lang.Class({
 		}
 		this.label.visible = SHOW_COUNT;
 	},
-
-	_onMenuOpened: function() {
-		// This event is fired when menu is shown or hidden
-		// Only open the submenu if the menu is being opened and there is something to show
-		this._checkAutoExpandList();
-	},
-
-	_checkAutoExpandList: function() {
-		if (this.menu.isOpen && UPDATES_PENDING > 0 && UPDATES_PENDING <= AUTO_EXPAND_LIST) {
-			this.menuExpander.setSubmenuShown(true);
-		} else {
-			this.menuExpander.setSubmenuShown(false);
-		}
-	},
-
+	
 	_showChecking: function(isChecking) {
 		if (isChecking == true) {
 			this.updateIcon.set_icon_name('fedora-unknown-symbolic');
