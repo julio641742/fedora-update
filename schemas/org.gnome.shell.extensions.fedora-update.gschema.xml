@@ -48,13 +48,6 @@
       <description>Command to run to update packages.</description>
     </key>
 
-    <key name="auto-expand-list" type="i">
-      <default>0</default>
-        <summary>Auto-open list submenu when updates count is lower than this number</summary>
-        <description></description>
-        <range min="0" max="100"/>
-    </key>
-
     <key name="allow-no-passwd" type="b">
       <default>false</default>
         <summary>Allow checks for updates without a password</summary>
