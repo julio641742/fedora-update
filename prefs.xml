@@ -24,11 +24,6 @@
 	<property name="upper">2000</property>
 	<property name="step_increment">30</property>
 </object>
-<object class="GtkAdjustment" id="Adjust_2">
-	<property name="lower">0</property>
-	<property name="upper">99</property>
-	<property name="step_increment">1</property>
-</object>
 <object class="GtkNotebook" id="prefs_widget">
 	<property name="expand">true</property>
 	<child>
@@ -127,26 +122,6 @@
 							<child>
 								<object class="GtkSwitch" id="field_count">
 									<property name="active">true</property>
-								</object>
-							</child>
-						</object>
-					</child>
-					<child>
-						<object class="GtkBox">
-							<property name="spacing">12</property>
-							<property name="margin-left">12</property>
-							<property name="hexpand">true</property>
-							<child>
-								<object class="GtkLabel">
-									<property name="label" translatable="yes">Auto-expand updates list if updates count is less than this number (0 to disable)</property>
-									<property name="hexpand">true</property>
-									<property name="xalign">0</property>
-									<property name="wrap">1</property>
-								</object>
-							</child>
-							<child>
-								<object class="GtkSpinButton" id="field_autoexpandlist">
-									<property name="adjustment">Adjust_2</property>
 								</object>
 							</child>
 						</object>
@@ -257,6 +232,9 @@
 							<property name="label">Reset</property>
 							<property name="can_focus">True</property>
 							<property name="receives_default">True</property>
+							<style>
+								<class name="destructive-action"/>
+							</style>
 						</object>
 					</child>
 		       		</object>
