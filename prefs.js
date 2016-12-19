@@ -54,14 +54,19 @@ function buildPrefsWidget(){
 	settings.bind('transient', buildable.get_object('field_transient'), 'active', Gio.SettingsBindFlags.DEFAULT);
 	settings.bind('update-cmd' , buildable.get_object('field_updatecmd') , 'text' , Gio.SettingsBindFlags.DEFAULT);
 	settings.bind('allow-no-passwd' , buildable.get_object('field_no_password') , 'active' , Gio.SettingsBindFlags.DEFAULT);
-	settings.bind('auto-expand-list', buildable.get_object('field_autoexpandlist'), 'value', Gio.SettingsBindFlags.DEFAULT);
 
 	box.show_all();
 
 	buildable.get_object('reset_button').connect('clicked', Lang.bind(this, function() {
 		// restore default settings for the relevant keys
 		let keys = ['update-cmd',
-		            'allow-no-passwd'];
+		            'allow-no-passwd',
+			    'check-interval',
+			    'always-visible',
+			    'show-count',
+			    'notify',
+			    'howmuch',
+			    'transient'];
 		keys.forEach(function(val) {
 			settings.set_value(val, settings.get_default_value(val));
 		}, this);
