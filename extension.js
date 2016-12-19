@@ -273,7 +273,6 @@ const FedoraUpdateIndicator = new Lang.Class({
 			}
 		}
 		UPDATES_PENDING = updatesCount;
-		this._checkAutoExpandList();
 		this._checkShowHide();
 	},
 
