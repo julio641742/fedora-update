@@ -28,7 +28,7 @@
     </defaults>
     <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/dnf</annotate>
     <annotate key="org.freedesktop.policykit.exec.argv1">check-update</annotate>
-    <annotate key="org.freedesktop.policykit.exec.argv1">--refresh</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv2">--refresh</annotate>
   </action>
 
 </policyconfig>
