@@ -61,12 +61,12 @@ function buildPrefsWidget(){
 		// restore default settings for the relevant keys
 		let keys = ['update-cmd',
 		            'allow-no-passwd',
-			    'check-interval',
-			    'always-visible',
-			    'show-count',
-			    'notify',
-			    'howmuch',
-			    'transient'];
+			    	'check-interval',
+			    	'always-visible',
+			    	'show-count',
+			    	'notify',
+			    	'howmuch',
+			    	'transient'];
 		keys.forEach(function(val) {
 			settings.set_value(val, settings.get_default_value(val));
 		}, this);
