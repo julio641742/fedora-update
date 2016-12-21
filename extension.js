@@ -161,16 +161,19 @@ const FedoraUpdateIndicator = new Lang.Class({
 		AUTO_EXPAND_LIST = this._settings.get_int('auto-expand-list');
 		ALLOW_NO_PASS = this._settings.get_boolean("allow-no-passwd");
 
-        if (this._settings.get_string('update-cmd') !== "")
-            UPDATE_CMD = PREPEND_CMD + this._settings.get_string('update-cmd');
-        else
-            UPDATE_CMD = PREPEND_CMD + STOCK_UPDATE_CMD;
+        	if (this._settings.get_string('update-cmd') !== "")
+            		UPDATE_CMD = PREPEND_CMD + this._settings.get_string('update-cmd');
+        	else
+            		UPDATE_CMD = PREPEND_CMD + STOCK_UPDATE_CMD;
 
-		if(ALLOW_NO_PASS)
-            LIST_CMD = PREPEND_CMD + STOCK_LIST_CMD;
-        else
-        	LIST_CMD = STOCK_LIST_CMD;
-
+		if(ALLOW_NO_PASS) {
+            		LIST_CMD = PREPEND_CMD + STOCK_LIST_CMD;
+			CHECK_CMD = PREPEND_CMD + STOCK_CHECK_CMD;
+		} else {
+        		LIST_CMD = STOCK_LIST_CMD;
+			CHECK_CMD = STOCK_CHECK_CMD;
+		}
+		
 		this._checkShowHide();
 		let that = this;
 		if (this._TimeoutId)
