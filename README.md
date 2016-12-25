@@ -26,6 +26,10 @@ Open your terminal and execute `cd /usr/share/polkit-1/actions && sudo wget http
 ### v1
 First version
 
+## Fedora Fresh Installation Script
+Install Steam, Spotify, Codecs, Google Chrome, Numix Theme and Icons, Fedy, Sublime Text and RPM Fusion [Free and Non Free] on your fedora installation without the sweat.
+> https://github.com/julio641742/fedora-fresh-installation
+
 
 ## Credits
 Forked from https://github.com/RaphaelRochet/arch-update
