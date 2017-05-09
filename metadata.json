@@ -4,7 +4,8 @@
   "shell-version": [
     "3.18",
     "3.20",
-    "3.22"
+    "3.22",
+    "3.24"
   ], 
   "url": "https://github.com/julio641742/fedora-update", 
   "uuid": "fedora-update@julio641742", 
