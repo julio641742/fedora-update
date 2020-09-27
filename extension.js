@@ -82,7 +82,7 @@ const FedoraUpdateIndicator = new Lang.Class({
 		this.parent(0.0, "FedoraUpdateIndicator");
 		Gtk.IconTheme.get_default().append_search_path(Me.dir.get_child('icons').get_path());
 
-		this.updateIcon = new St.Icon({icon_name: "fedora-unknown-symbolic", style_class: 'system-status-icon'});
+		this.updateIcon = new St.Icon({icon_name: "emblem-default-symbolic", style_class: 'system-status-icon'});
 
 		let box = new St.BoxLayout({ vertical: false, style_class: 'panel-status-menu-box' });
 		this.label = new St.Label({ text: '',
@@ -213,7 +213,7 @@ const FedoraUpdateIndicator = new Lang.Class({
 	
 	_showChecking: function(isChecking) {
 		if (isChecking == true) {
-			this.updateIcon.set_icon_name('fedora-unknown-symbolic');
+			this.updateIcon.set_icon_name('emblem-synchronizing-symbolic');
 			this.checkNowMenuContainer.actor.visible = false;
 			this.checkingMenuItem.actor.visible = true;;
 		} else {
@@ -226,7 +226,7 @@ const FedoraUpdateIndicator = new Lang.Class({
 		updatesCount = typeof updatesCount === 'number' ? updatesCount : UPDATES_PENDING;
 		if (updatesCount > 0) {
 			// Updates pending
-			this.updateIcon.set_icon_name('fedora-updates-symbolic');
+			this.updateIcon.set_icon_name('software-update-available-symbolic');
 			this._updateMenuExpander( true, Gettext.ngettext( "%d update pending", "%d updates pending", updatesCount ).format(updatesCount) );
 			this.updatesListMenuLabel.set_text( this._updateList.slice(0, LIST_UPDATES_MAX).join("\n") );
 			this.label.set_text(updatesCount.toString());
@@ -262,15 +262,15 @@ const FedoraUpdateIndicator = new Lang.Class({
 			this.label.set_text('');
 			if (updatesCount == -1) {
 				// Unknown
-				this.updateIcon.set_icon_name('fedora-unknown-symbolic');
+				this.updateIcon.set_icon_name('dialog-warning-symbolic');
 				this._updateMenuExpander( false, '' );
 			} else if (updatesCount == -2) {
 				// Error
-				this.updateIcon.set_icon_name('fedora-error-symbolic');
+				this.updateIcon.set_icon_name('dialog-warning-symbolic');
 				this._updateMenuExpander( false, _('Error') );
 			} else {
 				// Up to date
-				this.updateIcon.set_icon_name('fedora-uptodate-symbolic');
+				this.updateIcon.set_icon_name('emblem-default-symbolic');
 				this._updateMenuExpander( false, _('Up to date :)') );
 				UPDATES_LIST = []; // Reset stored list
 			}
@@ -439,7 +439,7 @@ const FedoraUpdateIndicator = new Lang.Class({
 			// We have to prepare this only once
 			this._notifSource = new MessageTray.SystemNotificationSource();
 			this._notifSource.createIcon = function() {
-				return new St.Icon({ icon_name: 'fedora-lit-symbolic' });
+				return new St.Icon({ icon_name: 'emblem-synchronizing-symbolic' });
 			};
 			// Take care of note leaving unneeded sources
 			this._notifSource.connect('destroy', Lang.bind(this, function() {this._notifSource = null;}));
