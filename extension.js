@@ -49,7 +49,7 @@ let CHECK_INTERVAL     = 60*60;   // 1h
 let NOTIFY             = false;
 let HOWMUCH            = 0;
 let TRANSIENT          = true;
-let ALLOW_NO_PASS      = false;
+let ALLOW_NO_PASS      = true;
 let LIST_UPDATES_MAX   = 30;
 let PREPEND_CMD        = "/usr/bin/pkexec --user root ";
 let STOCK_CHECK_CMD    = "/usr/bin/dnf check-update --refresh";
@@ -166,7 +166,7 @@ const FedoraUpdateIndicator = new Lang.Class({
         	else
             		UPDATE_CMD = PREPEND_CMD + STOCK_UPDATE_CMD;
 
-		if(ALLOW_NO_PASS) {
+		if(!ALLOW_NO_PASS) {
             		LIST_CMD = PREPEND_CMD + STOCK_LIST_CMD;
 			CHECK_CMD = PREPEND_CMD + STOCK_CHECK_CMD;
 		} else {
